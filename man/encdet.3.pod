@@ -1,0 +1,97 @@
+=head1 NAME
+
+encdet - an encoding detection library
+
+=head1 SYNOPSIS
+
+ #include <encdet.h>
+ 
+ encdet_t encdet_new(unsigned int langflags);
+ 
+ int encdet_handle_data(encdet_t det, const char *data, unsigned int len);
+ 
+ void encdet_data_end(encdet_t det);
+ 
+ void encdet_reset(encdet_t det);
+ 
+ const char *encdet_get_result(encdet_t det);
+ 
+ void encdet_destroy(encdet_t det);
+ 
+ const char *encdet_version(void);
+
+=head1 DESCRIPTION
+
+encdet is an encoding detection library which is a C interface to
+Mozilla Universal Charset Detector.
+http://www.mozilla.org/projects/intl/ChardetInterface.htm
+
+The original code is available at
+http://mxr.mozilla.org/seamonkey/source/extensions/universalchardet/
+
+=head1 API
+
+=head2 encdet_t encdet_new(unsigned int langflags);
+
+Creates a new detector object and returns it.
+It returns NULL if a memory allocation failed.
+The arguments I<langflags> must include one of the following language flags:
+ENCDET_CHINESE_SIMPLIFIED, ENCDET_CHINESE_TRADITIONAL, ENCDET_JAPANESE,
+ENCDET_KOREAN, ENCDET_NON_CJK, ENCDET_ALL, ENCDET_CHINESE, ENCDET_CJK.
+
+=head2 int encdet_handle_data(encdet_t det, const char *data, unsigned int len);
+
+Feeds a block of bytes to the detector.
+It returns zero on success, nonzero if failed.
+
+=head2 void encdet_data_end(encdet_t det);
+
+Tells the detector the last chance the make a decision.
+
+=head2 void encdet_reset(encdet_t det);
+
+Resets the detector to its initial state.
+
+=head2 const char *encdet_get_result(encdet_t det);
+
+Returns the name of the detected encoding or NULL if no encoding has been decided yet.
+
+=head2 void encdet_destroy(encdet_t det);
+
+Destroys the detector object.
+
+=head2 const char *encdet_version(void);
+
+Returns the library's version.
+
+=head1 EXAMPLES
+
+Here is an example of printing encoding of data from stdin.
+
+ #include <encdet.h>
+ #include <string.h>
+ #include <stdio.h>
+ 
+ int
+ main(int argc, char **argv)
+ {
+   char buf[BUFSIZ];
+   const char *encoding;
+   encdet_t det = encdet_new(ENCDET_ALL);
+   while ((fgets(buf, sizeof(buf), stdin)) != NULL) {
+     encdet_handle_data(det, buf, strlen(buf));
+   }
+   encdet_data_end(det);
+   encoding = encdet_get_result(det);
+   if (encoding) {
+     puts(encoding);
+   } else {
+     puts("UNKNOWN");
+   }
+   encdet_destroy(det);
+   return 0;
+ }
+
+=head1 AUTHOR
+
+Jiro Nishiguchi E<lt>jiro@cpan.orgE<gt>

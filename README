@@ -1,0 +1,37 @@
+encdet - an encoding detection library
+
+* About
+
+encdet is an encoding detection library which is a C interface to
+Mozilla Universal Charset Detector.
+http://www.mozilla.org/projects/intl/ChardetInterface.htm
+
+The original code is available at
+http://mxr.mozilla.org/seamonkey/source/extensions/universalchardet/
+
+The latest version is available at:
+http://wiki.github.com/spiritloose/encdet
+
+* Installation
+
+./configure && make && make install
+
+See INSTALL for more details.
+
+* API
+
+See encdet(3).
+
+* License
+
+Mozilla Public License Version 1.1.
+Alternatively, the library may be used under the terms of either
+the GNU General Public License Version 2 or later, or the GNU
+Lesser General Public License 2.1 or later.
+
+See COPYING and http://www.mozilla.org/MPL/ for more details.
+
+* Author
+
+Jiro Nishiguchi <jiro@cpan.org>
+
