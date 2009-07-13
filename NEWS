@@ -1,10 +1,3 @@
-encdet 0.2.0
-
-* Merged upstream commits a3a6183d5a22 and 4dd0cf2ba86f.
-  a3a6183d5a22: Bug 488426 - enable TIS-620 detector; r=smontagu
-  4dd0cf2ba86f: Bug 493781 Fixing warning in universalchardet array
-                subscript has type 'char'
-
 encdet 0.1.0
 
 * Initial release
