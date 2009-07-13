@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT(encdet, 0.1.0, jiro@cpan.org)
+AC_INIT(encdet, 0.2.0, jiro@cpan.org)
 AC_CONFIG_SRCDIR([src/encdet.cpp])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_HEADER([src/config.h])
