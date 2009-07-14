@@ -7,3 +7,6 @@ $(man_MANS): encdet.3.pod
 			--release="$(PACKAGE_NAME) $(PACKAGE_VERSION)" \
 			--date="`date +'%B %Y'`" \
 			$< > $@
+dist-hook:
+	touch encdet.3.pod
+	$(MAKE) $(man_MANS)
